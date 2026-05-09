@@ -1,0 +1,32 @@
+*.iml
+.gradle
+/local.properties
+/.idea/*
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+*.apk
+*.aab
+*.keystore
+gradle/wrapper/gradle-wrapper.jar
+__pycache__/
+*.pyc
+
+# Build outputs
+/app/build/
+/app/.cxx/
+/.kotlin/
+
+# Editor
+.vscode/
+*.swp
+
+# Local screenshots / scratch (kept out of repo)
+notes/
+
+# Raw data dumps (regeneratable via scripts/refresh_data.py)
+data/raw_top500.json
+data/candidates_365.json

@@ -1,0 +1,26 @@
+{
+  "name": "교육심리 매일",
+  "short_name": "교육심리",
+  "description": "Journal of Educational Psychology 의 인용 상위 논문을 매일 한 편씩.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#fdfdff",
+  "theme_color": "#5B4FCF",
+  "lang": "ko",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

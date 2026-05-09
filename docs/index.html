@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="교육심리">
+<meta name="theme-color" content="#5B4FCF">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+<title>교육심리 매일</title>
+</head>
+<body>
+<noscript>JavaScript 가 필요합니다.</noscript>
+
+<!-- ============ TODAY VIEW ============ -->
+<section id="view-today" class="view">
+  <header class="bar">
+    <span id="day-label" class="muted">Day –</span>
+    <nav>
+      <button id="btn-today-jump" class="link" hidden>오늘로</button>
+      <button id="btn-history" class="link">목록</button>
+      <button id="btn-settings" class="icon-btn" aria-label="설정">⚙️</button>
+    </nav>
+  </header>
+
+  <article id="paper-card" class="card">
+    <div class="title-row">
+      <h1 id="paper-title">불러오는 중…</h1>
+      <button id="btn-fav" class="star" aria-label="즐겨찾기">☆</button>
+    </div>
+    <p id="paper-meta" class="muted small"></p>
+    <p id="paper-authors" class="authors small"></p>
+    <p id="paper-abstract" class="abstract"></p>
+
+    <div class="actions">
+      <button id="btn-translate-papago" class="primary">번역 (Papago)</button>
+      <button id="btn-translate-google" class="link small">Google 번역</button>
+      <a id="btn-doi" class="link" target="_blank" rel="noopener" hidden>원문 (DOI)</a>
+    </div>
+  </article>
+
+  <div class="nav-row">
+    <button id="btn-prev" class="outline">이전</button>
+    <button id="btn-next" class="outline">다음</button>
+  </div>
+</section>
+
+<!-- ============ HISTORY VIEW ============ -->
+<section id="view-history" class="view" hidden>
+  <header class="bar">
+    <h2>히스토리 (365편)</h2>
+    <button class="link" data-close="view-history">닫기</button>
+  </header>
+
+  <input id="search-input" type="search" placeholder="제목·저자 검색" autocomplete="off">
+
+  <div class="tabs">
+    <button id="tab-all" class="tab active">전체 (365)</button>
+    <button id="tab-favs" class="tab">즐겨찾기 (0)</button>
+  </div>
+
+  <div id="history-list"></div>
+  <p id="history-empty" class="empty muted" hidden>결과가 없습니다.</p>
+</section>
+
+<!-- ============ SETTINGS VIEW ============ -->
+<section id="view-settings" class="view" hidden>
+  <header class="bar">
+    <h2>설정</h2>
+    <button class="link" data-close="view-settings">닫기</button>
+  </header>
+
+  <h3 class="section">정보</h3>
+  <hr>
+  <div class="row">
+    <span>버전</span><span class="muted" id="info-version">1.0 (web)</span>
+  </div>
+  <hr>
+  <div class="row">
+    <span>논문 수</span><span class="muted" id="info-count">365편</span>
+  </div>
+  <hr>
+  <div class="row">
+    <span>데이터</span><span class="muted">OpenAlex · ISSN 0022-0663</span>
+  </div>
+  <hr>
+  <div class="row">
+    <span>데이터 새로고침</span>
+    <button id="btn-refresh-data" class="link">다시 받기</button>
+  </div>
+  <hr>
+
+  <h3 class="section">사용 방법</h3>
+  <hr>
+  <p class="hint muted small">
+    iPhone 사용자는 Safari 의 공유 메뉴에서 <b>"홈 화면에 추가"</b> 를 선택하면
+    앱처럼 사용할 수 있습니다. 즐겨찾기는 이 기기에 저장됩니다.
+  </p>
+
+  <p class="hint muted small">
+    번역 버튼을 누르면 외부 번역 사이트 (Papago / Google) 가 새 창으로 열립니다.
+    원문은 OpenAlex 의 영어 abstract 입니다.
+  </p>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
