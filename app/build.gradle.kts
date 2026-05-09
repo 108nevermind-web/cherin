@@ -1,7 +1,21 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+}
+
+// Read release-signing credentials from local.properties (which is gitignored).
+// Schema:
+//   RELEASE_STORE_FILE=release.jks
+//   RELEASE_STORE_PASSWORD=...
+//   RELEASE_KEY_ALIAS=cherin-release
+//   RELEASE_KEY_PASSWORD=...
+val keystoreProps = Properties().apply {
+    val f = rootProject.file("local.properties")
+    if (f.exists()) load(FileInputStream(f))
 }
 
 android {
@@ -16,9 +30,25 @@ android {
         versionName = "0.1.0"
     }
 
+    signingConfigs {
+        create("release") {
+            val storeFilePath = keystoreProps.getProperty("RELEASE_STORE_FILE")
+            if (!storeFilePath.isNullOrBlank()) {
+                storeFile = rootProject.file(storeFilePath)
+                storePassword = keystoreProps.getProperty("RELEASE_STORE_PASSWORD")
+                keyAlias = keystoreProps.getProperty("RELEASE_KEY_ALIAS")
+                keyPassword = keystoreProps.getProperty("RELEASE_KEY_PASSWORD")
+            }
+            // If the four properties are missing, this signingConfig stays empty
+            // and a release build will fail with a clear "no signing config" error
+            // — preferable to silently signing with the debug key.
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 

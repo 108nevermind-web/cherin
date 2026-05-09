@@ -11,6 +11,7 @@ local.properties
 *.apk
 *.aab
 *.keystore
+*.jks
 gradle/wrapper/gradle-wrapper.jar
 __pycache__/
 *.pyc
@@ -29,4 +30,11 @@ notes/
 
 # Raw data dumps (regeneratable via scripts/refresh_data.py)
 data/raw_top500.json
+data/raw_top50.json
 data/candidates_365.json
+
+# Legacy mirror — superseded by docs/papers.json for GitHub Pages
+assets/
+
+# Claude Code local config
+.claude/
