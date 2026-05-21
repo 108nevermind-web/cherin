@@ -69,6 +69,7 @@ import com.cherin.edupsych.data.PaperRepository
 import com.cherin.edupsych.data.WeeklyRefreshWorker
 import com.cherin.edupsych.notify.DailyNotificationWorker
 import com.cherin.edupsych.notify.DailyNotifier
+import com.cherin.edupsych.photo.PhotoScreen
 import com.cherin.edupsych.widget.FavoritesWidget
 import com.cherin.edupsych.widget.WidgetUpdateWorker
 import androidx.glance.appwidget.updateAll
@@ -151,6 +152,7 @@ fun AppRoot() {
     var dayIdx by rememberSaveable { mutableIntStateOf(todayIdx) }
     var showHistory by rememberSaveable { mutableStateOf(false) }
     var showSettings by rememberSaveable { mutableStateOf(false) }
+    var showPhotos by rememberSaveable { mutableStateOf(false) }
     var favorites by remember { mutableStateOf(FavoritesStore.load(context)) }
 
     val scope = rememberCoroutineScope()
@@ -179,6 +181,7 @@ fun AppRoot() {
             },
             onBack = { showHistory = false },
         )
+        showPhotos -> PhotoScreen(onBack = { showPhotos = false })
         else -> TodayScreen(
             papers = papers,
             dayIdx = dayIdx,
@@ -190,6 +193,7 @@ fun AppRoot() {
             onJumpToday = { dayIdx = todayIdx },
             onShowHistory = { showHistory = true },
             onShowSettings = { showSettings = true },
+            onShowPhotos = { showPhotos = true },
         )
     }
 }
@@ -207,6 +211,7 @@ fun TodayScreen(
     onJumpToday: () -> Unit,
     onShowHistory: () -> Unit,
     onShowSettings: () -> Unit,
+    onShowPhotos: () -> Unit,
 ) {
     val context = LocalContext.current
     val paper = papers[dayIdx]
@@ -244,6 +249,15 @@ fun TodayScreen(
                 }
                 TextButton(onClick = onShowHistory) {
                     Text(stringResource(R.string.open_history), fontSize = 12.sp)
+                }
+                TextButton(
+                    onClick = onShowPhotos,
+                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp),
+                    modifier = Modifier.semantics {
+                        contentDescription = "사진 기록"
+                    },
+                ) {
+                    Text(text = "📷", fontSize = 16.sp)
                 }
                 TextButton(
                     onClick = onShowSettings,

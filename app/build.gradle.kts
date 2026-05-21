@@ -53,12 +53,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
 
     buildFeatures {
@@ -72,11 +72,8 @@ android {
     }
 }
 
-// Force the Kotlin compiler toolchain to JDK 17 (matches our compileOptions
-// and the installed Microsoft OpenJDK 17). Without this, Kotlin 2.2 tries
-// to provision JetBrains Runtime 21, which is unavailable.
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 dependencies {
@@ -93,6 +90,10 @@ dependencies {
     implementation(libs.mlkit.translate)
     implementation(libs.play.services.tasks.ktx)
     implementation(libs.kotlinx.coroutines.play.services)
+
+    // EXIF metadata extraction + image loading for photo records
+    implementation(libs.exifinterface)
+    implementation(libs.coil.compose)
 
     // Home-screen widget (Glance) + daily refresh worker
     implementation(libs.glance.appwidget)
